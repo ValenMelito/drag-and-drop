@@ -9,16 +9,40 @@ function cambiarFondo(){
 }*/
 
 function agregarNota(){
-    const contenidoNota = document.getElementById('nota');
+    let contenidoNota = document.getElementById('nota');
+    console.log(contenidoNota.value)
 
     if(contenidoNota.value!=""){
         interiorNota=contenidoNota.value;
-        let nuevoDiv= document.getElementById('cuerpo');
-        nuevoDiv.innerHTML+=
-        `
-        <div class="cuboDeNota">${interiorNota}</div>
-        `
+        let nuevoElemento = document.createElement('div');
 
+        // Asignar una clase al nuevo elemento
+        nuevoElemento.className = 'cuboDeNota';
+
+        nuevoElemento.textContent=contenidoNota.value;
+        nuevoElemento.onclick=cambiarFondo;
+
+        let posicion=document.getElementById('sectorDeNotas');
+
+        posicion.appendChild(nuevoElemento);
+
+
+        contenidoNota.value='';
     }
-
 }
+
+
+
+   function a(){
+    console.log("aaaa")
+   }
+
+    function cambiarFondo(){
+        let fondo = document.getElementById('cuerpo');
+        let numeroRandom=Math.floor(Math.random() * 999999);
+        console.log(numeroRandom);
+        fondo.style.backgroundColor = `#${numeroRandom}`;
+
+
+       
+    }
