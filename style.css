@@ -87,12 +87,9 @@ textarea::-webkit-button{
     flex-direction: column;
     justify-content: center;
 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
 }
   
-#sectorDeNotas{
-    border: 5px solid #000000;
-
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
