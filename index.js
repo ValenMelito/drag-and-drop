@@ -1,6 +1,10 @@
 let boton=document.getElementById('enviar');
+let seArrastra=false;
+
+
 
 boton.addEventListener('click', agregarNota);
+
 
 /*
 function cambiarFondo(){
@@ -25,8 +29,9 @@ function agregarNota(){
 
         nuevoElemento.textContent=contenidoNota.value;
         nuevoElemento.onclick=cambiarFondo;
+        nuevoElemento.addEventListener('mousedown', a);
 
-        let posicion=document.getElementById('centrado');
+        let posicion=document.getElementById('sectorDeNotas');
 
         posicion.appendChild(nuevoElemento);
 
@@ -36,7 +41,27 @@ function agregarNota(){
 }
 
 
-/*document.addEventListener('mousedown',mover(e))
+
+
+/*
+notasMovibles.addEventListener('mousedown', (e) =>{
+    seArrastra=true;
+    offsetX = e.clientX - draggableElement.getBoundingClientRect().left;
+    offsetY = e.clientY - draggableElement.getBoundingClientRect().top;
+
+    console.log("posicion del mouse en X: "+offsetX+" y posicion Y:"+offsetY) 
+})
+
+notasMovibles.addEventListener('mousemove',(e)=>{
+
+})
+
+
+function mover(){
+
+}
+
+document.addEventListener('mousedown',mover(e))
 
     function mover(e){
         let posicionX = e.clientX - offsetX + 'px';
@@ -45,13 +70,29 @@ function agregarNota(){
         console.log("posicion del mouse en X: "+posicionX+" y posicion Y:"+posicionY) 
     }*/
 
-    
- document.addEventListener('mousedown', (posicion) => {
-            const mouseX = posicion.clientX;
-            const mouseY = posicion.clientY;
-            //console.clear(); // Limpiar la consola para una salida más limpia
-            console.log(`Coordenadas del mouse: x=${mouseX}, y=${mouseY}`);
-        });
+        
+document.addEventListener('mousedown', (Coordenadas) =>{
+
+    const mouseX = Coordenadas.clientX;
+    const mouseY = Coordenadas.clientY;
+    //console.clear(); // Limpiar la consola para una salida más limpia
+    console.log(`Coordenadas del mouse: x=${mouseX}, y=${mouseY}`);
+
+    let punto = document.createElement('div');
+
+    // Asignar una clase al nuevo elemento
+   
+    let posicion=document.getElementById('cuerpo');
+
+    punto.style.top= mouseY +"px";
+    punto.style.left= mouseX+ "px";
+    punto.className = 'punto';
+
+    posicion.appendChild(punto);
+
+
+
+})
 /*
 document.addEventListener('keydown', (e) => {
     const teclaPresionada= e.key;
