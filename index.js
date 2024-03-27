@@ -8,7 +8,7 @@ boton.addEventListener('click', agregarNota);
 
 /*
 function cambiarFondo(){
-    let fondo = document.getElementById('cuerpo');
+    let fondo = docudiferenciaClickElementoXment.getElementById('cuerpo');
     fondo.style.backgroundColor = 'red';
 }*/
 
@@ -32,33 +32,33 @@ function agregarNota(){
 
         nuevoElemento.addEventListener('mousedown', (e) =>{
             seArrastra=true;
-            offsetX = e.clientX - nuevoElemento.getBoundingClientRect().left;
-            offsetY = e.clientY - nuevoElemento.getBoundingClientRect().top;
+            diferenciaClickElementoX = e.clientX - nuevoElemento.getBoundingClientRect().left;
+            diferenciaClickElementoY = e.clientY - nuevoElemento.getBoundingClientRect().top;
+            
+            nuevoElemento.style.zIndex=0;
 
-            console.log("posicion del mouse en X: "+offsetX+" y posicion Y:"+offsetY) 
+            console.log("posicion del mouse en X: "+diferenciaClickElementoX+" y posicion Y:"+diferenciaClickElementoY) 
+            /*console.log("clientX "+e.clientX)
+            console.log("funcion del elemento"+nuevoElemento.getBoundingClientRect().left)*/
         })
 
         nuevoElemento.addEventListener('mousemove',(e)=>{
+        console.log(seArrastra);
         if(seArrastra==true){
-            const newLeft = e.clientX;
-            const newTop = e.clientY;
+
+            const nuevaPosicionX = e.pageX - diferenciaClickElementoX;
+            const nuevaPosicionY = e.pageY - diferenciaClickElementoY;
             // Asigna la nueva posición al elemento
-            nuevoElemento.style.left = newLeft + 'px';
-            nuevoElemento.style.top = newTop + 'px';
+            nuevoElemento.style.left = nuevaPosicionX + 'px';
+            nuevoElemento.style.top = nuevaPosicionY + 'px';
     }
 })
 
-document.addEventListener('mouseup', (newLeft, newTop) =>{ //un pu
-
-    const mouseX = newLeft+ 'px';
-    const mouseY = newTop+ 'px';
-    //console.clear(); // Limpiar la consola para una salida más limpia
-    console.log(`Coordenadas del mouse: x=${mouseX}, y=${mouseY}`);
-    
-    nuevoElemento.style.left= mouseX+ "px";
-    nuevoElemento.style.top= mouseY +"px";
+document.addEventListener('mouseup', () =>{ //un pu
     seArrastra=false;
-
+    /*
+    nuevoElemento.style.left = nuevaPosicionX + 'px';
+    nuevoElemento.style.top = nuevaPosicionY + 'px';*/
 })
 
         let posicion=document.getElementById('cuerpo');
@@ -139,6 +139,7 @@ document.addEventListener('keydown', (e) => {
    }
 
     function cambiarFondo(){
+        
         let fondo = document.getElementById('cuerpo');
         let numeroRandom=Math.floor(Math.random() * 999999);
         console.log(numeroRandom);
