@@ -1,5 +1,6 @@
 let boton=document.getElementById('enviar');
 boton.addEventListener('click', agregarNota);
+window.onload=agregarEventos();
 
 let seArrastra=false;
 
@@ -18,40 +19,10 @@ function agregarNota(){
         // Asignar una clase al nuevo elemento
         nuevoElemento.className = 'cuboDeNota';
         nuevoElemento.textContent=contenidoNota.value;
-        
-        nuevoElemento.addEventListener('mousedown', (e) =>{
-            
-            seArrastra=true;
-            diferenciaClickElementoX = e.clientX - nuevoElemento.getBoundingClientRect().left;
-            diferenciaClickElementoY = e.clientY - nuevoElemento.getBoundingClientRect().top;
-            
-            nuevoElemento.style.zIndex=1;
-            console.log("posicion del mouse en X: "+diferenciaClickElementoX+" y posicion Y:"+diferenciaClickElementoY) 
-            /*console.log("clientX "+e.clientX)
-            console.log("funcion del elemento"+nuevoElemento.getBoundingClientRect().left)*/
-        })
-
-        nuevoElemento.addEventListener('mousemove',(e)=>{
-        console.log(seArrastra);
-        if(seArrastra==true){
-
-            const nuevaPosicionX = e.pageX - diferenciaClickElementoX;
-            const nuevaPosicionY = e.pageY - diferenciaClickElementoY;
-            // Asigna la nueva posición al elemento
-            nuevoElemento.style.left = nuevaPosicionX + 'px';
-            nuevoElemento.style.top = nuevaPosicionY + 'px';
-    }
-})
-
-document.addEventListener('mouseup', () =>{ //un pu
-    seArrastra=false;
-})
 
         let posicion=document.getElementById('cuerpo');
 
         posicion.appendChild(nuevoElemento);
-
-
         contenidoNota.value='';
         agregarEventos();
     }
@@ -66,65 +37,36 @@ function agregarEventos(){
     cubosDeNota.forEach(function(cubito) {
         cubito.addEventListener("click", cambiarFondo); //este es temporal de prueba tengo ideas para hacer en click
         
+        cubito.addEventListener('mousedown', (e) =>{
+            
+            seArrastra=true;
+            diferenciaClickElementoX = e.clientX - cubito.getBoundingClientRect().left;
+            diferenciaClickElementoY = e.clientY - cubito.getBoundingClientRect().top;
+            
+            console.log("posicion del mouse en X: "+diferenciaClickElementoX+" y posicion Y:"+diferenciaClickElementoY) 
+            /*console.log("clientX "+e.clientX)
+            console.log("funcion del elemento"+nuevoElemento.getBoundingClientRect().left)*/
+        })
+
+        cubito.addEventListener('mousemove',(e)=>{
+        console.log(seArrastra);
+        if(seArrastra==true){
+
+            const nuevaPosicionX = e.pageX - diferenciaClickElementoX;
+            const nuevaPosicionY = e.pageY - diferenciaClickElementoY;
+            // Asigna la nueva posición al elemento
+            cubito.style.left = nuevaPosicionX + 'px';
+            cubito.style.top = nuevaPosicionY + 'px';
+            }
+        })
+
+        document.addEventListener('mouseup', () =>{ //un pu
+            seArrastra=false;
+        }) 
     })
 }
 
-
- /*       
-document.addEventListener('mousedown', (Coordenadas) =>{    //un punto cuando va para abajo y otro cuando va para arriba para generar la linea
-
-    const mouseX = Coordenadas.clientX;
-    const mouseY = Coordenadas.clientY;
-    //console.clear(); // Limpiar la consola para una salida más limpia
-    console.log(`Coordenadas del mouse: x=${mouseX}, y=${mouseY}`);
-
-    let punto = document.createElement('div');
-
-    // Asignar una clase al nuevo elemento
-   
-    let posicion=document.getElementById('cuerpo');
-    
-    punto.style.left= mouseX+ "px";
-    punto.style.top= mouseY +"px";
-    punto.className = 'punto';
-
-    posicion.appendChild(punto);
-
-})
-*/
-/*
-document.addEventListener('mouseup', (Coordenadas) =>{ //un pu
-
-    const mouseX = Coordenadas.clientX;
-    const mouseY = Coordenadas.clientY;
-    //console.clear(); // Limpiar la consola para una salida más limpia
-    console.log(`Coordenadas del mouse: x=${mouseX}, y=${mouseY}`);
-
-    let punto = document.createElement('div');
-
-    // Asignar una clase al nuevo elemento
-   
-    let posicion=document.getElementById('cuerpo');
-    
-    punto.style.left= mouseX+ "px";
-    punto.style.top= mouseY +"px";
-    punto.className = 'punto';
-
-    posicion.appendChild(punto);
-
-})
-
-document.addEventListener('keydown', (e) => {
-    const teclaPresionada= e.key;
-    console.log(teclaPresionada);
-})*/
-
-   function a(){
-    console.log("aaaa")
-   }
-
     function cambiarFondo(){
-        
         let fondo = document.getElementById('cuerpo');
         let numeroRandom=Math.floor(Math.random() * 999999);
         console.log(numeroRandom);
