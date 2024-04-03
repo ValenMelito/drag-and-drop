@@ -1,16 +1,7 @@
 let boton=document.getElementById('enviar');
-let seArrastra=false;
-
-
-
 boton.addEventListener('click', agregarNota);
 
-
-/*
-function cambiarFondo(){
-    let fondo = docudiferenciaClickElementoXment.getElementById('cuerpo');
-    fondo.style.backgroundColor = 'red';
-}*/
+let seArrastra=false;
 
 function agregarNota(){
     let contenidoNota = document.getElementById('nota');
@@ -26,17 +17,15 @@ function agregarNota(){
 
         // Asignar una clase al nuevo elemento
         nuevoElemento.className = 'cuboDeNota';
-
         nuevoElemento.textContent=contenidoNota.value;
-        nuevoElemento.onclick=cambiarFondo;
-
+        
         nuevoElemento.addEventListener('mousedown', (e) =>{
+            
             seArrastra=true;
             diferenciaClickElementoX = e.clientX - nuevoElemento.getBoundingClientRect().left;
             diferenciaClickElementoY = e.clientY - nuevoElemento.getBoundingClientRect().top;
             
-            nuevoElemento.style.zIndex=0;
-
+            nuevoElemento.style.zIndex=1;
             console.log("posicion del mouse en X: "+diferenciaClickElementoX+" y posicion Y:"+diferenciaClickElementoY) 
             /*console.log("clientX "+e.clientX)
             console.log("funcion del elemento"+nuevoElemento.getBoundingClientRect().left)*/
@@ -56,9 +45,6 @@ function agregarNota(){
 
 document.addEventListener('mouseup', () =>{ //un pu
     seArrastra=false;
-    /*
-    nuevoElemento.style.left = nuevaPosicionX + 'px';
-    nuevoElemento.style.top = nuevaPosicionY + 'px';*/
 })
 
         let posicion=document.getElementById('cuerpo');
@@ -67,25 +53,24 @@ document.addEventListener('mouseup', () =>{ //un pu
 
 
         contenidoNota.value='';
+        agregarEventos();
     }
 }
 
 
 
+function agregarEventos(){
+    let cubosDeNota=document.querySelectorAll('.cuboDeNota');
 
-
-
-
-
-
-
-
-/*
-function mover(){
-
+    console.log("cuantos hay: "+cubosDeNota.length)
+    cubosDeNota.forEach(function(cubito) {
+        cubito.addEventListener("click", cambiarFondo); //este es temporal de prueba tengo ideas para hacer en click
+        
+    })
 }
 
-        
+
+ /*       
 document.addEventListener('mousedown', (Coordenadas) =>{    //un punto cuando va para abajo y otro cuando va para arriba para generar la linea
 
     const mouseX = Coordenadas.clientX;
